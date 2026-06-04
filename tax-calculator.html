@@ -116,7 +116,7 @@
                                 <small>Total sales that include GST</small>
                             </div>
 
-                            <button type="button" class="primary-button calc-button" onclick="calculateTax()">Calculate My Tax</button>
+                            <button id="calculateButton" type="button" class="primary-button calc-button">Calculate My Tax</button>
                         </form>
                     </div>
 
@@ -165,8 +165,8 @@
                         </div>
 
                         <div class="calc-actions">
-                            <button class="primary-button" onclick="downloadResults()">Download Results</button>
-                            <button class="secondary-button" onclick="resetCalculator()">Calculate Again</button>
+                            <button id="downloadResults" class="primary-button">Download Results</button>
+                            <button id="resetCalculator" class="secondary-button">Calculate Again</button>
                         </div>
                     </div>
                 </div>
@@ -194,109 +194,5 @@
     </footer>
 
     <script src="Logic/script.js" defer></script>
-    <script>
-        // Toggle GST fields based on checkbox
-        document.getElementById('gstRegistered').addEventListener('change', function() {
-            document.getElementById('gstGroup').style.display = this.checked ? 'block' : 'none';
-            document.getElementById('salesWithGstGroup').style.display = this.checked ? 'block' : 'none';
-        });
-
-        // Format currency
-        function formatCurrency(amount) {
-            return new Intl.NumberFormat('en-NZ', {
-                style: 'currency',
-                currency: 'NZD',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
-            }).format(amount);
-        }
-
-        // Calculate tax
-        function calculateTax() {
-            const revenue = parseFloat(document.getElementById('totalRevenue').value) || 0;
-            const cogs = parseFloat(document.getElementById('costOfGoods').value) || 0;
-            const salaries = parseFloat(document.getElementById('salaries').value) || 0;
-            const rent = parseFloat(document.getElementById('rent').value) || 0;
-            const utilities = parseFloat(document.getElementById('utilities').value) || 0;
-            const supplies = parseFloat(document.getElementById('supplies').value) || 0;
-            const professional = parseFloat(document.getElementById('professional').value) || 0;
-            const marketing = parseFloat(document.getElementById('marketing').value) || 0;
-            const vehicle = parseFloat(document.getElementById('vehicle').value) || 0;
-            const other = parseFloat(document.getElementById('other').value) || 0;
-            const taxRate = parseFloat(document.getElementById('taxRate').value) || 20;
-            const isGstRegistered = document.getElementById('gstRegistered').checked;
-            const gstRate = parseFloat(document.getElementById('gstRate').value) || 15;
-            const salesWithGst = parseFloat(document.getElementById('salesWithGst').value) || 0;
-
-            // Calculate total expenses
-            const totalExpenses = cogs + salaries + rent + utilities + supplies + professional + marketing + vehicle + other;
-
-            // Calculate taxable profit
-            const taxableProfit = revenue - totalExpenses;
-
-            // Calculate income tax
-            const incomeTax = taxableProfit > 0 ? (taxableProfit * taxRate / 100) : 0;
-
-            // Calculate GST
-            let gstLiability = 0;
-            if (isGstRegistered && salesWithGst > 0) {
-                gstLiability = (salesWithGst * gstRate / 100);
-            }
-
-            // Total tax
-            const totalTax = incomeTax + gstLiability;
-
-            // Display results
-            document.getElementById('estimatedTax').textContent = formatCurrency(totalTax);
-            document.getElementById('displayRevenue').textContent = formatCurrency(revenue);
-            document.getElementById('displayExpenses').textContent = formatCurrency(totalExpenses);
-            document.getElementById('displayProfit').textContent = formatCurrency(taxableProfit);
-            document.getElementById('displayIncomeTax').textContent = formatCurrency(incomeTax);
-            
-            if (isGstRegistered) {
-                document.getElementById('gstDisplayGroup').style.display = 'block';
-                document.getElementById('displayGst').textContent = formatCurrency(gstLiability);
-            } else {
-                document.getElementById('gstDisplayGroup').style.display = 'none';
-            }
-
-            document.getElementById('resultsSection').style.display = 'block';
-            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Download results
-        function downloadResults() {
-            const results = `
-Tax Calculation Summary
-========================
-Revenue: ${document.getElementById('displayRevenue').textContent}
-Expenses: ${document.getElementById('displayExpenses').textContent}
-Taxable Profit: ${document.getElementById('displayProfit').textContent}
-
-Income Tax: ${document.getElementById('displayIncomeTax').textContent}
-${document.getElementById('gstDisplayGroup').style.display === 'block' ? 'GST Liability: ' + document.getElementById('displayGst').textContent + '\n' : ''}
-TOTAL TAX ESTIMATE: ${document.getElementById('estimatedTax').textContent}
-
-Generated on: ${new Date().toLocaleDateString()}
-
-Note: This is an estimate for planning purposes only. Consult a tax professional for accurate calculations.
-            `;
-            
-            const blob = new Blob([results], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'tax-calculation.txt';
-            a.click();
-        }
-
-        // Reset calculator
-        function resetCalculator() {
-            document.getElementById('taxForm').reset();
-            document.getElementById('resultsSection').style.display = 'none';
-            document.getElementById('gstGroup').style.display = 'none';
-            document.getElementById('salesWithGstGroup').style.display = 'none';
-        }
-    </script>
 </body>
 </html>

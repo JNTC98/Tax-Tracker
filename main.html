@@ -26,7 +26,7 @@
                     <p class="eyebrow">Comprehensive Tax Solutions</p>
                     <h1>Expert guidance for your business finances</h1>
                     <p class="message">Streamline your tax management with our comprehensive suite of tools and resources designed specifically for small business owners and entrepreneurs.</p>
-                    <button class="primary-button" onclick="scrollToServices()">Explore Services</button>
+                    <button id="mainExploreServices" class="primary-button">Explore Services</button>
                 </div>
                 <div class="hero-media">
                     <img src="Images and icons/main-page-photo.jpg" alt="Professional tax consultation">
@@ -93,8 +93,8 @@
                 <h2>Ready to take control of your business taxes?</h2>
                 <p>Start with our Tax 101 guide, use our calculator, or consult with our tax agent today.</p>
                 <div class="cta-buttons">
-                    <button class="primary-button" onclick="location.href='tax-101.html'">Get Started</button>
-                    <button class="secondary-button" onclick="location.href='tax-calculator.html'">Try Calculator</button>
+                    <button id="mainGetStartedTax101" class="primary-button">Get Started</button>
+                    <button id="mainTryCalculator" class="secondary-button">Try Calculator</button>
                 </div>
             </div>
         </section>
@@ -108,10 +108,5 @@
     </footer>
 
     <script src="Logic/script.js" defer></script>
-    <script>
-        function scrollToServices() {
-            document.querySelector('.services-section').scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
 </body>
 </html>
