@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculator - Business Tax Estimator</title>
+    <link rel="stylesheet" href="Appearance/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Tax Solution</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="main.html">Services</a></li>
+                <li><a href="tax-101.html">Tax 101</a></li>
+                <li><a href="tax-calculator.html" class="active">Calculator</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <section class="calc-header">
+            <div class="calc-hero">
+                <p class="eyebrow">Interactive Tool</p>
+                <h1>Business Tax Calculator</h1>
+                <p class="subtitle">Estimate your tax liability and optimize your taxable income</p>
+            </div>
+        </section>
+
+        <section class="calc-section">
+            <div class="calc-container">
+                <div class="calc-wrapper">
+                    <div class="calc-form">
+                        <h2>Calculate Your Business Tax</h2>
+                        <p class="form-intro">Enter your business income and expenses to estimate your tax liability. Results are for planning purposes only.</p>
+
+                        <form id="taxForm">
+                            <div class="form-group">
+                                <label for="totalRevenue">Total Business Revenue (Annual)</label>
+                                <input type="number" id="totalRevenue" name="totalRevenue" placeholder="$50,000" min="0" step="100">
+                                <small>All income from your business activities</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="costOfGoods">Cost of Goods Sold (COGS)</label>
+                                <input type="number" id="costOfGoods" name="costOfGoods" placeholder="$10,000" min="0" step="100">
+                                <small>Direct costs to produce goods/services</small>
+                            </div>
+
+                            <div class="form-divider">Other Business Expenses</div>
+
+                            <div class="form-group">
+                                <label for="salaries">Employee Salaries & Wages</label>
+                                <input type="number" id="salaries" name="salaries" placeholder="$20,000" min="0" step="100">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rent">Rent or Mortgage</label>
+                                <input type="number" id="rent" name="rent" placeholder="$6,000" min="0" step="100">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="utilities">Utilities & Internet</label>
+                                <input type="number" id="utilities" name="utilities" placeholder="$1,200" min="0" step="100">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="supplies">Office Supplies & Equipment</label>
+                                <input type="number" id="supplies" name="supplies" placeholder="$2,000" min="0" step="100">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="professional">Professional Services (Accounting, Legal)</label>
+                                <input type="number" id="professional" name="professional" placeholder="$1,500" min="0" step="100">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="marketing">Marketing & Advertising</label>
+                                <input type="number" id="marketing" name="marketing" placeholder="$3,000" min="0" step="100">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="vehicle">Vehicle Expenses (Fuel, Maintenance)</label>
+                                <input type="number" id="vehicle" name="vehicle" placeholder="$2,000" min="0" step="100">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="other">Other Business Expenses</label>
+                                <input type="number" id="other" name="other" placeholder="$1,000" min="0" step="100">
+                            </div>
+
+                            <div class="form-divider">Tax Information</div>
+
+                            <div class="form-group">
+                                <label for="taxRate">Income Tax Rate (%)</label>
+                                <input type="number" id="taxRate" name="taxRate" placeholder="20" min="0" max="100" step="0.1" value="20">
+                                <small>Your applicable tax rate (check with tax authority)</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gstRegistered">
+                                    <input type="checkbox" id="gstRegistered" name="gstRegistered">
+                                    I'm registered for GST
+                                </label>
+                            </div>
+
+                            <div class="form-group" id="gstGroup" style="display: none;">
+                                <label for="gstRate">GST Rate (%)</label>
+                                <input type="number" id="gstRate" name="gstRate" placeholder="15" min="0" max="100" step="0.1" value="15">
+                            </div>
+
+                            <div class="form-group" id="salesWithGstGroup" style="display: none;">
+                                <label for="salesWithGst">Sales Subject to GST</label>
+                                <input type="number" id="salesWithGst" name="salesWithGst" placeholder="$45,000" min="0" step="100">
+                                <small>Total sales that include GST</small>
+                            </div>
+
+                            <button type="button" class="primary-button calc-button" onclick="calculateTax()">Calculate My Tax</button>
+                        </form>
+                    </div>
+
+                    <div class="calc-results" id="resultsSection" style="display: none;">
+                        <h2>Your Tax Estimate</h2>
+                        
+                        <div class="results-card main-result">
+                            <div class="result-item">
+                                <span class="result-label">Estimated Tax Liability</span>
+                                <span class="result-value" id="estimatedTax">$0</span>
+                            </div>
+                        </div>
+
+                        <div class="results-breakdown">
+                            <div class="breakdown-card">
+                                <h4>Income Summary</h4>
+                                <div class="breakdown-item">
+                                    <span>Total Revenue</span>
+                                    <span id="displayRevenue">$0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Total Expenses</span>
+                                    <span id="displayExpenses">$0</span>
+                                </div>
+                                <div class="breakdown-item highlight">
+                                    <span>Taxable Profit</span>
+                                    <span id="displayProfit">$0</span>
+                                </div>
+                            </div>
+
+                            <div class="breakdown-card">
+                                <h4>Tax Breakdown</h4>
+                                <div class="breakdown-item">
+                                    <span>Income Tax</span>
+                                    <span id="displayIncomeTax">$0</span>
+                                </div>
+                                <div class="breakdown-item" id="gstDisplayGroup" style="display: none;">
+                                    <span>GST Liability</span>
+                                    <span id="displayGst">$0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="calculator-note">
+                            <p><strong>📌 Important:</strong> This is an estimate for planning purposes only. Actual tax liability may vary based on your specific situation, deductions, and applicable tax law. Consult with a tax professional for accurate calculations and advice.</p>
+                        </div>
+
+                        <div class="calc-actions">
+                            <button class="primary-button" onclick="downloadResults()">Download Results</button>
+                            <button class="secondary-button" onclick="resetCalculator()">Calculate Again</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-tips">
+                    <h3>💡 Tips to Reduce Your Tax</h3>
+                    <ul>
+                        <li>Track all business expenses carefully—every deduction counts</li>
+                        <li>Keep receipts and invoices organized for at least 5 years</li>
+                        <li>Consider home office deductions if you work from home</li>
+                        <li>Review equipment purchases for depreciation deductions</li>
+                        <li>Consult a tax professional about timing of income and expenses</li>
+                        <li>Stay updated on changes to tax laws and new credits available</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Tax Solution. Tax calculator tool for business planning.</p>
+            <p>This calculator provides estimates only and is not a substitute for professional tax advice.</p>
+        </div>
+    </footer>
+
+    <script src="Logic/script.js" defer></script>
+    <script>
+        // Toggle GST fields based on checkbox
+        document.getElementById('gstRegistered').addEventListener('change', function() {
+            document.getElementById('gstGroup').style.display = this.checked ? 'block' : 'none';
+            document.getElementById('salesWithGstGroup').style.display = this.checked ? 'block' : 'none';
+        });
+
+        // Format currency
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-NZ', {
+                style: 'currency',
+                currency: 'NZD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Calculate tax
+        function calculateTax() {
+            const revenue = parseFloat(document.getElementById('totalRevenue').value) || 0;
+            const cogs = parseFloat(document.getElementById('costOfGoods').value) || 0;
+            const salaries = parseFloat(document.getElementById('salaries').value) || 0;
+            const rent = parseFloat(document.getElementById('rent').value) || 0;
+            const utilities = parseFloat(document.getElementById('utilities').value) || 0;
+            const supplies = parseFloat(document.getElementById('supplies').value) || 0;
+            const professional = parseFloat(document.getElementById('professional').value) || 0;
+            const marketing = parseFloat(document.getElementById('marketing').value) || 0;
+            const vehicle = parseFloat(document.getElementById('vehicle').value) || 0;
+            const other = parseFloat(document.getElementById('other').value) || 0;
+            const taxRate = parseFloat(document.getElementById('taxRate').value) || 20;
+            const isGstRegistered = document.getElementById('gstRegistered').checked;
+            const gstRate = parseFloat(document.getElementById('gstRate').value) || 15;
+            const salesWithGst = parseFloat(document.getElementById('salesWithGst').value) || 0;
+
+            // Calculate total expenses
+            const totalExpenses = cogs + salaries + rent + utilities + supplies + professional + marketing + vehicle + other;
+
+            // Calculate taxable profit
+            const taxableProfit = revenue - totalExpenses;
+
+            // Calculate income tax
+            const incomeTax = taxableProfit > 0 ? (taxableProfit * taxRate / 100) : 0;
+
+            // Calculate GST
+            let gstLiability = 0;
+            if (isGstRegistered && salesWithGst > 0) {
+                gstLiability = (salesWithGst * gstRate / 100);
+            }
+
+            // Total tax
+            const totalTax = incomeTax + gstLiability;
+
+            // Display results
+            document.getElementById('estimatedTax').textContent = formatCurrency(totalTax);
+            document.getElementById('displayRevenue').textContent = formatCurrency(revenue);
+            document.getElementById('displayExpenses').textContent = formatCurrency(totalExpenses);
+            document.getElementById('displayProfit').textContent = formatCurrency(taxableProfit);
+            document.getElementById('displayIncomeTax').textContent = formatCurrency(incomeTax);
+            
+            if (isGstRegistered) {
+                document.getElementById('gstDisplayGroup').style.display = 'block';
+                document.getElementById('displayGst').textContent = formatCurrency(gstLiability);
+            } else {
+                document.getElementById('gstDisplayGroup').style.display = 'none';
+            }
+
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Download results
+        function downloadResults() {
+            const results = `
+Tax Calculation Summary
+========================
+Revenue: ${document.getElementById('displayRevenue').textContent}
+Expenses: ${document.getElementById('displayExpenses').textContent}
+Taxable Profit: ${document.getElementById('displayProfit').textContent}
+
+Income Tax: ${document.getElementById('displayIncomeTax').textContent}
+${document.getElementById('gstDisplayGroup').style.display === 'block' ? 'GST Liability: ' + document.getElementById('displayGst').textContent + '\n' : ''}
+TOTAL TAX ESTIMATE: ${document.getElementById('estimatedTax').textContent}
+
+Generated on: ${new Date().toLocaleDateString()}
+
+Note: This is an estimate for planning purposes only. Consult a tax professional for accurate calculations.
+            `;
+            
+            const blob = new Blob([results], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'tax-calculation.txt';
+            a.click();
+        }
+
+        // Reset calculator
+        function resetCalculator() {
+            document.getElementById('taxForm').reset();
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('gstGroup').style.display = 'none';
+            document.getElementById('salesWithGstGroup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

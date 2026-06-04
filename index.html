@@ -7,19 +7,46 @@
     <link rel="stylesheet" href="Appearance/styles.css">
 </head>
 <body>
-    <main class="hero">
-        <div class="hero-card">
-            <div class="hero-copy">
-                <p class="eyebrow">Business Tax Services</p>
-                <h1>Smart, secure tax support for modern companies</h1>
-                <p id="message" class="message">Welcome to the Business Tax Service Center.</p>
-                <button class="primary-button" onclick="changeText()">Get started</button>
-            </div>
-            <div class="hero-media">
-                <img src="Images and icons/main-page-photo.jpg" alt="Professional tax consultation">
-            </div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Tax Solution</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="main.html">Services</a></li>
+                <li><a href="tax-101.html">Tax 101</a></li>
+                <li><a href="tax-calculator.html">Calculator</a></li>
+            </ul>
         </div>
+    </nav>
+
+    <main class="page-content">
+        <section class="hero-section" style="display: flex; align-items: center; justify-content: center; min-height: calc(100vh - 80px);">
+            <div class="hero">
+                <div class="hero-card">
+                    <div class="hero-copy">
+                        <p class="eyebrow">Business Tax Services</p>
+                        <h1>Smart, secure tax support for modern companies</h1>
+                        <p id="message" class="message">Welcome to the Business Tax Service Center. Explore our tools to manage your business taxes efficiently and legally save money.</p>
+                        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <button class="primary-button" onclick="location.href='main.html'">Get started</button>
+                            <button class="secondary-button" onclick="location.href='tax-calculator.html'">Try Calculator</button>
+                        </div>
+                    </div>
+                    <div class="hero-media">
+                        <img src="Images and icons/main-page-photo.jpg" alt="Professional tax consultation">
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Tax Solution. Helping businesses save money legally.</p>
+            <p>Not registered as a formal tax advisor. Consult with a professional for specific tax advice.</p>
+        </div>
+    </footer>
+
     <script src="Logic/script.js" defer></script>
 </body>
 </html>

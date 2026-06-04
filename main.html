@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Solution - Business Tax Services</title>
+    <link rel="stylesheet" href="Appearance/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Tax Solution</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="main.html" class="active">Services</a></li>
+                <li><a href="tax-101.html">Tax 101</a></li>
+                <li><a href="tax-calculator.html">Calculator</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <section class="hero-section">
+            <div class="hero-card">
+                <div class="hero-copy">
+                    <p class="eyebrow">Comprehensive Tax Solutions</p>
+                    <h1>Expert guidance for your business finances</h1>
+                    <p class="message">Streamline your tax management with our comprehensive suite of tools and resources designed specifically for small business owners and entrepreneurs.</p>
+                    <button class="primary-button" onclick="scrollToServices()">Explore Services</button>
+                </div>
+                <div class="hero-media">
+                    <img src="Images and icons/main-page-photo.jpg" alt="Professional tax consultation">
+                </div>
+            </div>
+        </section>
+
+        <section class="services-section">
+            <div class="services-container">
+                <h2>Our Services</h2>
+                <p class="section-subtitle">Complete tax solutions tailored for your business needs</p>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">📋</div>
+                        <h3>Tax Agent Consultation</h3>
+                        <p>Get personalized advice on your specific tax situation. Our AI-powered system helps identify opportunities to reduce your tax burden legally and efficiently.</p>
+                        <a href="tax-agent.html" class="card-link">Learn More →</a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">📚</div>
+                        <h3>Tax 101 Guide</h3>
+                        <p>Master the fundamentals of business tax. Step-by-step introduction to tax reports, deadlines, and essential documentation every business owner needs to know.</p>
+                        <a href="tax-101.html" class="card-link">Start Learning →</a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">🧮</div>
+                        <h3>Tax Calculator</h3>
+                        <p>Calculate your business tax liability quickly and accurately. Optimize your taxable income and plan ahead with confidence using our interactive calculator.</p>
+                        <a href="tax-calculator.html" class="card-link">Calculate Now →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="benefits-section">
+            <div class="benefits-container">
+                <h2>Why Choose Tax Solution?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <h4>📈 Save Money Legally</h4>
+                        <p>Identify legitimate tax deductions and credits to minimize your tax liability</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>⚡ Quick & Easy</h4>
+                        <p>Intuitive tools designed for busy business owners—no accounting degree required</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>📊 Expert Guidance</h4>
+                        <p>Stay compliant with current tax laws and regulations with our up-to-date resources</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>🔒 Secure & Private</h4>
+                        <p>Your business data is protected with enterprise-grade security</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Ready to take control of your business taxes?</h2>
+                <p>Start with our Tax 101 guide, use our calculator, or consult with our tax agent today.</p>
+                <div class="cta-buttons">
+                    <button class="primary-button" onclick="location.href='tax-101.html'">Get Started</button>
+                    <button class="secondary-button" onclick="location.href='tax-calculator.html'">Try Calculator</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Tax Solution. Helping businesses save money legally.</p>
+            <p>Not registered as a formal tax advisor. Consult with a professional for specific tax advice.</p>
+        </div>
+    </footer>
+
+    <script src="Logic/script.js" defer></script>
+    <script>
+        function scrollToServices() {
+            document.querySelector('.services-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
