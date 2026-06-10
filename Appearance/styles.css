@@ -188,6 +188,14 @@ h1 {
     object-fit: cover;
 }
 
+.session-label {
+    margin: 14px 0 20px;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    font-weight: 700;
+    color: #3c3c3c;
+}
+
 .services-container,
 .benefits-container,
 .cta-content,

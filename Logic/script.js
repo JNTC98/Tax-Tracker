@@ -1,10 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const page = document.body.dataset.page;
+
+    switch (page) {
+        case 'index':
+            initIndexPage();
+            break;
+        case 'services':
+            initMainPage();
+            break;
+        case 'tax101':
+            initTax101Page();
+            break;
+        case 'calculator':
+            initCalculatorPage();
+            break;
+        default:
+            initGeneralPage();
+            break;
+    }
+});
+
+function initGeneralPage() {
     bindNavigationButton('indexGetStarted', 'main.html');
     bindNavigationButton('indexTryCalculator', 'tax-calculator.html');
     bindNavigationButton('mainGetStartedTax101', 'tax-101.html');
     bindNavigationButton('mainTryCalculator', 'tax-calculator.html');
     bindNavigationButton('tax101Calculator', 'tax-calculator.html');
     bindNavigationButton('tax101BackServices', 'main.html');
+}
+
+function initIndexPage() {
+    bindNavigationButton('indexGetStarted', 'main.html');
+    bindNavigationButton('indexTryCalculator', 'tax-calculator.html');
+}
+
+function initMainPage() {
+    bindNavigationButton('mainGetStartedTax101', 'tax-101.html');
+    bindNavigationButton('mainTryCalculator', 'tax-calculator.html');
 
     const exploreBtn = document.getElementById('mainExploreServices');
     if (exploreBtn) {
@@ -13,7 +45,14 @@ document.addEventListener('DOMContentLoaded', () => {
             servicesSection?.scrollIntoView({ behavior: 'smooth' });
         });
     }
+}
 
+function initTax101Page() {
+    bindNavigationButton('tax101Calculator', 'tax-calculator.html');
+    bindNavigationButton('tax101BackServices', 'main.html');
+}
+
+function initCalculatorPage() {
     const gstCheckbox = document.getElementById('gstRegistered');
     if (gstCheckbox) {
         gstCheckbox.addEventListener('change', toggleGstFields);
@@ -33,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (resetButton) {
         resetButton.addEventListener('click', resetCalculator);
     }
-});
+}
 
 function bindNavigationButton(buttonId, url) {
     const button = document.getElementById(buttonId);
