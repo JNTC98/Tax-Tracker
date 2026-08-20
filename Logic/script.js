@@ -1,3 +1,6 @@
+// ===== PAGE INITIALIZATION =====
+// This section handles setting up the correct page when the website loads.
+
 document.addEventListener('DOMContentLoaded', () => {
     const page = document.body.dataset.page;
 
@@ -19,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             break;
     }
 });
+// Detects which page is loaded and runs the matching setup function.
 
 function initGeneralPage() {
     bindNavigationButton('indexGetStarted', 'main.html');
@@ -28,11 +32,13 @@ function initGeneralPage() {
     bindNavigationButton('tax101Calculator', 'tax-calculator.html');
     bindNavigationButton('tax101BackServices', 'main.html');
 }
+// Sets up navigation buttons that appear on multiple pages.
 
 function initIndexPage() {
     bindNavigationButton('indexGetStarted', 'main.html');
     bindNavigationButton('indexTryCalculator', 'tax-calculator.html');
 }
+// Connects buttons on the home page to their destination pages.
 
 function initMainPage() {
     bindNavigationButton('mainGetStartedTax101', 'tax-101.html');
@@ -46,11 +52,13 @@ function initMainPage() {
         });
     }
 }
+// Prepares the services page with navigation and a smooth scroll feature.
 
 function initTax101Page() {
     bindNavigationButton('tax101Calculator', 'tax-calculator.html');
     bindNavigationButton('tax101BackServices', 'main.html');
 }
+// Connects buttons on the tax education page to other pages.
 
 function initCalculatorPage() {
     const gstCheckbox = document.getElementById('gstRegistered');
@@ -73,6 +81,10 @@ function initCalculatorPage() {
         resetButton.addEventListener('click', resetCalculator);
     }
 }
+// Connects all calculator buttons and checkboxes to their action functions.
+
+// ===== NAVIGATION FUNCTIONS =====
+// This section handles moving users between different pages.
 
 function bindNavigationButton(buttonId, url) {
     const button = document.getElementById(buttonId);
@@ -82,6 +94,10 @@ function bindNavigationButton(buttonId, url) {
         });
     }
 }
+// Makes a button clickable so it takes users to another page.
+
+// ===== CALCULATOR UI FUNCTIONS =====
+// This section handles showing and hiding form fields based on user choices.
 
 function toggleGstFields() {
     const checked = this.checked;
@@ -95,6 +111,10 @@ function toggleGstFields() {
         salesGroup.style.display = checked ? 'block' : 'none';
     }
 }
+// Shows or hides GST-related input fields when the checkbox is toggled.
+
+// ===== UTILITY FUNCTIONS =====
+// This section contains helper functions used by other functions.
 
 function formatCurrency(amount) {
     return new Intl.NumberFormat('en-NZ', {
@@ -104,6 +124,10 @@ function formatCurrency(amount) {
         maximumFractionDigits: 0,
     }).format(amount);
 }
+// Converts numbers to NZD currency format for display.
+
+// ===== TAX CALCULATION FUNCTIONS =====
+// This section does the math to calculate taxes and displays the results.
 
 function calculateTax() {
     const revenue = parseFloat(document.getElementById('totalRevenue')?.value) || 0;
@@ -169,6 +193,10 @@ function calculateTax() {
         resultsSection.scrollIntoView({ behavior: 'smooth' });
     }
 }
+// Calculates income tax and GST, then displays all results on the page.
+
+// ===== EXPORT FUNCTIONS =====
+// This section handles downloading and saving calculation results.
 
 function downloadResults() {
     const displayRevenue = document.getElementById('displayRevenue')?.textContent || '';
@@ -203,6 +231,10 @@ Note: This is an estimate for planning purposes only. Consult a tax professional
     a.click();
     URL.revokeObjectURL(url);
 }
+// Creates a text file with the tax calculation results and downloads it to the computer.
+
+// ===== RESET FUNCTIONS =====
+// This section handles clearing the calculator back to its starting state.
 
 function resetCalculator() {
     const form = document.getElementById('taxForm');
@@ -225,3 +257,4 @@ function resetCalculator() {
         salesGroup.style.display = 'none';
     }
 }
+// Clears all calculator inputs and hides the results so the user can start over.

@@ -199,10 +199,17 @@ h1 {
 .services-container,
 .benefits-container,
 .cta-content,
-.guide-container,
 .calc-container {
     max-width: 1200px;
     margin: 0 auto;
+}
+
+.guide-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 32px;
 }
 
 .services-section {
@@ -335,14 +342,16 @@ h1 {
 }
 
 .table-of-contents {
-    padding: 20px;
+    padding: 16px;
     position: sticky;
     top: 100px;
+    height: fit-content;
 }
 
 .table-of-contents h3 {
     margin-top: 0;
     font-size: 1.1rem;
+    margin-bottom: 12px;
 }
 
 .table-of-contents ul {
@@ -352,14 +361,15 @@ h1 {
 }
 
 .table-of-contents li {
-    margin: 12px 0;
+    margin: 8px 0;
 }
 
 .table-of-contents a {
     color: #000;
     text-decoration: none;
     display: block;
-    padding: 6px 8px;
+    padding: 4px 6px;
+    font-size: 0.95rem;
 }
 
 .table-of-contents a:hover {
